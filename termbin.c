@@ -94,8 +94,7 @@ int main(int argc, char **argv)
                 return 0;
             }            
             close(connfd);
-            int state;
-            waitpid(pid, &state, 0);
+            while (waitpid(-1, NULL, WNOHANG) > 0);
         }
         return 0;
     }
@@ -130,14 +129,15 @@ int main(int argc, char **argv)
             {
                 char file_name[50], info[5000];             
                 sprintf(file_name, "%06ld", timer);
-                char file_path[50] = "http://localhost:8080/";
+                char file_path[50] = "http://pastebin.husthxj.top:8080/";
                 FILE *file_ptr = fopen(file_name, "wb");
-                send(connfd, strcat(file_path, strcat(file_name, "\n")), 50, MSG_DONTWAIT);
+                printf("Created: %s\n", file_name);
+                send(connfd, strcat(file_path, strcat(file_name, "\n")), 50, MSG_DONTWAIT);                
                 int recv_size;
                 do
                 {
                     memset(info, 0, sizeof(info));
-                    recv_size = recv(connfd, info, 5000, 0);
+                    recv_size = recv(connfd, info, 5000, MSG_DONTWAIT);
                     if(recv_size > 0)
                         fwrite(info, 1, recv_size, file_ptr);
                 } while (recv_size > 0);                               
@@ -146,8 +146,7 @@ int main(int argc, char **argv)
                 return 0;
             }            
             close(connfd);
-            int state;
-            waitpid(pid, &state, 0);
+            while (waitpid(-1, NULL, WNOHANG) > 0);
         }
         return 0;
     }
