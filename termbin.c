@@ -42,6 +42,7 @@ int main(int argc, char **argv)
         listen(listenfd, 1024);
         while(1)
         {  
+            while (waitpid(-1, NULL, WNOHANG) > 0);
             int connfd = accept(listenfd, ptr->ai_addr, &ptr->ai_addrlen);
             if (connfd == -1)
                 continue;
@@ -86,7 +87,6 @@ int main(int argc, char **argv)
                 return 0;
             }            
             close(connfd);
-            while (waitpid(-1, NULL, WNOHANG) > 0);
         }
         return 0;
     }
@@ -111,6 +111,7 @@ int main(int argc, char **argv)
         listen(listenfd, 1024);
         while (1)
         {
+            while (waitpid(-1, NULL, WNOHANG) > 0);
             int connfd = accept(listenfd, ptr->ai_addr, &ptr->ai_addrlen);
             if (connfd == -1)
                 continue;
@@ -138,7 +139,6 @@ int main(int argc, char **argv)
                 return 0;
             }            
             close(connfd);
-            while (waitpid(-1, NULL, WNOHANG) > 0);
         }
         return 0;
     }
