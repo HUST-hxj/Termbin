@@ -6,14 +6,6 @@
 #include <string.h>
 #include <wait.h>
 
-int debug()
-{
-    FILE *ptr;
-    ptr = fopen("debug.txt", "w");
-    fclose(ptr);
-    return 0;
-}
-
 int check_require(char require[], char file_name[])
 {
     if (strncmp(require, "GET /", 5))
