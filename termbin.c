@@ -28,7 +28,7 @@ int main(int argc, char **argv)
         memset(&hints, 0, sizeof(hints));
         hints.ai_socktype = SOCK_STREAM;
         hints.ai_flags = AI_PASSIVE | AI_ADDRCONFIG | AI_NUMERICSERV;
-        getaddrinfo(NULL, "8080", &hints, &result);
+        getaddrinfo(NULL, "80", &hints, &result);
         for (ptr = result; ptr; ptr = ptr->ai_next)
         {
             listenfd = socket(ptr->ai_family, ptr->ai_socktype, ptr->ai_protocol);
@@ -122,7 +122,7 @@ int main(int argc, char **argv)
             {
                 char file_name[50], info[5000];             
                 sprintf(file_name, "%06ld", timer);
-                char file_path[50] = "http://pastebin.husthxj.top:8080/";
+                char file_path[50] = "http://pastebin.husthxj.top/";
                 FILE *file_ptr = fopen(file_name, "wb");
                 printf("Created: %s\n", file_name);
                 send(connfd, strcat(file_path, strcat(file_name, "\n")), 50, MSG_DONTWAIT);                
