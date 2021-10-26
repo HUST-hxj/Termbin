@@ -69,7 +69,7 @@ int main(int argc, char **argv)
                 rewind(file_ptr);                
                 char header[200];
                 memset(header, 0, sizeof(header));
-                sprintf(header, "HTTP/1.1 200 OK\nContent-Type:application/octet-stream\nContent-Length: %llu\n\n", file_size);
+                sprintf(header, "HTTP/1.1 200 OK\nContent-Type:text/plain\nContent-Length: %llu\n\n", file_size);
                 send(connfd, header, strlen(header), 0);
                 int read_size;
                 do
