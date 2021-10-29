@@ -122,7 +122,7 @@ int main(int argc, char **argv)
             {
                 char file_name[50], info[5000];             
                 sprintf(file_name, "%06ld", timer);
-                char file_path[50] = "http://pastebin.husthxj.top/";
+                char file_path[50] = "http://pastebin.honeta.site/";
                 FILE *file_ptr = fopen(file_name, "wb");
                 printf("Created: %s\n", file_name);
                 send(connfd, strcat(file_path, strcat(file_name, "\n")), 50, MSG_DONTWAIT);                
