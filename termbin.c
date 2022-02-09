@@ -51,7 +51,7 @@ int main(int argc, char **argv)
             {
                 char require[500], info[5000];
                 memset(require, 0, sizeof(require));
-                recv(connfd, require, 500, MSG_DONTWAIT); 
+                recv(connfd, require, 500, 0); 
                 char file_name[50];
                 if (!check_require(require, file_name))
                 {                    
@@ -70,7 +70,7 @@ int main(int argc, char **argv)
                 char header[200];
                 memset(header, 0, sizeof(header));
                 sprintf(header, "HTTP/1.1 200 OK\nContent-Type:text/plain\nContent-Length: %llu\n\n", file_size);
-                send(connfd, header, strlen(header), 0);
+                send(connfd, header, strlen(header), MSG_DONTWAIT);
                 int read_size;
                 do
                 {
@@ -78,7 +78,7 @@ int main(int argc, char **argv)
                     read_size = fread(info, 1, 5000, file_ptr);
                     if(read_size > 0)
                     {
-                        send(connfd, info, read_size, 0);
+                        send(connfd, info, read_size, MSG_DONTWAIT);
                         file_size -= read_size;
                     }
                 } while (file_size > 0);
