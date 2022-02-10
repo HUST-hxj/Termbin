@@ -78,7 +78,7 @@ int main(int argc, char **argv)
                     read_size = fread(info, 1, 5000, file_ptr);
                     if(read_size > 0)
                     {
-                        send(connfd, info, read_size, MSG_DONTWAIT);
+                        send(connfd, info, read_size, 0);
                         file_size -= read_size;
                     }
                 } while (file_size > 0);
@@ -130,7 +130,7 @@ int main(int argc, char **argv)
                 do
                 {
                     memset(info, 0, sizeof(info));
-                    recv_size = recv(connfd, info, 5000, MSG_DONTWAIT);
+                    recv_size = recv(connfd, info, 5000, 0);
                     if(recv_size > 0)
                         fwrite(info, 1, recv_size, file_ptr);
                 } while (recv_size > 0);                               
